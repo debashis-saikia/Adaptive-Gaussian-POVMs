@@ -2,13 +2,10 @@ import cv2
 import numpy as np
 
 def save_salt_pepper_noise(input_path, output_path, prob=0.02):
-    # Read image
-    image = cv2.imread(input_path, 0)   # 0 → grayscale
-    
+    image = cv2.imread(input_path, 0)   
     noisy = np.copy(image)
     thres = 1 - prob
-
-    # Add salt & pepper noise
+    # Salt and Pepper noise
     for i in range(image.shape[0]):
         for j in range(image.shape[1]):
             r = np.random.random()
