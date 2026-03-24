@@ -11,13 +11,11 @@ class KAnalysis:
 
         self.image_paths = image_paths
 
-        # Fixed labels (order matters)
         default_labels = ["Lena", "Peppers", "Barbara", "100", "1001"]
 
         if len(image_paths) > len(default_labels):
             raise ValueError("More images than predefined labels.")
 
-        # Map image paths → labels
         self.labels = {
             path: default_labels[i]
             for i, path in enumerate(image_paths)
@@ -25,7 +23,6 @@ class KAnalysis:
 
         self.k_values = []
 
-        # Store results per image
         self.results = {
             path: {
                 "psnr": [],
@@ -36,7 +33,6 @@ class KAnalysis:
 
     def run_k_sweep(self, k_range=(1, 14), gamma=2):
 
-        # k = 1 → 13
         self.k_values = list(range(k_range[0], k_range[1] + 1, 2))
 
         for path in self.image_paths:
@@ -60,14 +56,10 @@ class KAnalysis:
                 ssim_vals.append(metrics["SSIM"])
                 percent_vals.append(metrics["Percent Change"])
 
-            # Store results
             self.results[path]["psnr"] = psnr_vals
             self.results[path]["ssim"] = ssim_vals
             self.results[path]["percent"] = percent_vals
 
-        print("\n✅ K sweep completed.")
-
-    # ------------------ PLOTTING ------------------
 
     def plot_psnr_analysis(self):
 
@@ -139,28 +131,10 @@ class KAnalysis:
         plt.show()
 
 
-# ===================== IMPLEMENTATION =====================
+image_list = [r"C:...\The-256-256-Lena-image.png",  r"C:...\peppers.jpg",  r"C:...\barbara.bmp",  r"C:...\100.jpg",  r"C:...1001.jpg" ]
 
-if __name__ == "__main__":
-
-    # ⚠️ Order must match labels
-    image_list = [
-        r"C:\Users\IISER13\OneDrive\Desktop\Prasanta Panigrahi\KMeans Based\The-256-256-Lena-image.png",  
-        r"C:\Users\IISER13\OneDrive\Desktop\Prasanta Panigrahi\peppers.jpg",   # → Lena
-        r"C:\Users\IISER13\OneDrive\Desktop\Prasanta Panigrahi\Old Codes\barbara.bmp",   # → Peppers
-        r"C:\Users\IISER13\OneDrive\Desktop\Prasanta Panigrahi\KMeans Based\100.jpg",       # → 100
-        r"C:\Users\IISER13\OneDrive\Desktop\Prasanta Panigrahi\KMeans Based\1001.jpg"       # → 1001
-    ]
-
-    analysis = KAnalysis(image_list)
-
-    # Run k sweep (γ fixed at 2)
-    analysis.run_k_sweep(
-        k_range=(1, 13),
-        gamma=2
-    )
-
-    # Plot results
-    analysis.plot_psnr_analysis()
-    analysis.plot_ssim_analysis()
-    analysis.plot_entropy_analysis()
+analysis = KAnalysis(image_list)
+analysis.run_k_sweep(k_range=(1, 13), gamma=2)
+analysis.plot_psnr_analysis()
+analysis.plot_ssim_analysis()
+analysis.plot_entropy_analysis()
