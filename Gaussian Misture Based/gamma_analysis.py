@@ -11,13 +11,11 @@ class GammaAnalysis:
 
         self.image_paths = image_paths
 
-        # Fixed labels (order matters)
         default_labels = ["Lena", "Peppers", "Barbara", "100", "1001"]
 
         if len(image_paths) > len(default_labels):
             raise ValueError("More images than predefined labels.")
 
-        # Map image paths → labels
         self.labels = {
             path: default_labels[i]
             for i, path in enumerate(image_paths)
@@ -36,7 +34,6 @@ class GammaAnalysis:
 
     def run_gamma_sweep(self, k_clusters, gamma_range=(1, 49)):
 
-        # 🔥 Optimized: only odd gamma values → 1,3,5,...,49
         self.gamma_values = list(range(gamma_range[0], gamma_range[1] + 1, 2))
 
         for path in self.image_paths:
@@ -60,14 +57,9 @@ class GammaAnalysis:
                 ssim_vals.append(metrics["SSIM"])
                 percent_vals.append(metrics["Percent Change"])
 
-            # Store results
             self.results[path]["psnr"] = psnr_vals
             self.results[path]["ssim"] = ssim_vals
             self.results[path]["percent"] = percent_vals
-
-        print("\n✅ Gamma sweep completed (optimized).")
-
-    # ------------------ PLOTTING ------------------
 
     def plot_psnr_analysis(self):
 
@@ -139,23 +131,16 @@ class GammaAnalysis:
         plt.show()
 
 
-# ===================== IMPLEMENTATION =====================
 
-if __name__ == "__main__":
+image_list = [
+        r"C:...\The-256-256-Lena-image.png",  
+        r"C:...\peppers.jpg",   
+        r"C:...\barbara.bmp",   
+        r"C:...\100.jpg",       
+        r"C:...\1001.jpg"]
 
-    # ⚠️ Order must match labels:
-    image_list = [
-        r"C:\Users\IISER13\OneDrive\Desktop\Prasanta Panigrahi\KMeans Based\The-256-256-Lena-image.png",  
-        r"C:\Users\IISER13\OneDrive\Desktop\Prasanta Panigrahi\peppers.jpg",   # → Lena
-        r"C:\Users\IISER13\OneDrive\Desktop\Prasanta Panigrahi\Old Codes\barbara.bmp",   # → Peppers
-        r"C:\Users\IISER13\OneDrive\Desktop\Prasanta Panigrahi\KMeans Based\100.jpg",       # → 100
-        r"C:\Users\IISER13\OneDrive\Desktop\Prasanta Panigrahi\KMeans Based\1001.jpg"       # → 1001
-    ]
-
-    analysis = GammaAnalysis(image_list)
-
-    # Run optimized gamma sweep
-    analysis.run_gamma_sweep(
+analysis = GammaAnalysis(image_list)
+analysis.run_gamma_sweep(
         k_clusters=3,
         gamma_range=(1, 49)
     )
