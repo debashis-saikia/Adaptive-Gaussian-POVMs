@@ -1,7 +1,7 @@
 # Unsharp Measurement with Adaptive Gaussian POVMs for Quantum-Inspired Image Processing
 
-* **Author**: Debashis Saikia
-* **Co- Authors**: Bikash K. Behera, Mayukha Pal, Prasanta K. Panigrahi
+* **Author**: [Debashis Saikia](https://scholar.google.com/citations?user=_s3yuzkAAAAJ&hl=en&oi=ao)
+* **Co- Authors**: [Bikash K. Behera](https://scholar.google.com/citations?user=if1XXEwAAAAJ&hl=en), [Mayukha Pal](https://scholar.google.com/citations?user=2VW0NvcAAAAJ&hl=en), [Prasanta K. Panigrahi](https://scholar.google.com/citations?user=sNq6fwwAAAAJ&hl=en)
 
 -------------------------------------------------
 
