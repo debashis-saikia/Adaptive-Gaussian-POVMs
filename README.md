@@ -10,3 +10,12 @@
 -------------------------------------------
 
 * *arXiv*: https://arxiv.org/abs/2604.04685
+
+```
+@article{saikia2026unsharp,
+  author  = {D. Saikia and B. K. Behera and M. Pal and P. K. Panigrahi},
+  title   = {Unsharp Measurement with Adaptive Gaussian POVMs for Quantum-Inspired Image Processing},
+  journal = {arXiv preprint arXiv:2604.04685},
+  year    = {2026}
+}
+```
